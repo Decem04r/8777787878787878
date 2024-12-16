@@ -27,8 +27,7 @@
 
         .page {
             position: absolute;
-            top: 0;
-            left: 100%;
+            top: 100%;
             width: 100%;
             height: 100%;
             display: flex;
@@ -95,12 +94,12 @@
         }
 
         #page1 {
-            left: 0;
+            top: 0;
             opacity: 1;
         }
 
         .page:not(#page1) {
-            left: 100%;
+            top: 100%;
         }
 
         /* 自定义技能动画 */
@@ -182,11 +181,11 @@
             const next = document.getElementById(`page${pageNumber}`);
             
             // 设置当前页的动画
-            current.style.transform = "translateX(-100%)";
+            current.style.transform = "translateY(-100%)";
             current.style.opacity = 0;
             
             // 设置下一页的动画
-            next.style.transform = "translateX(0)";
+            next.style.transform = "translateY(0)";
             next.style.opacity = 1;
             
             currentPage = pageNumber;
@@ -198,11 +197,11 @@
             const prev = document.getElementById(`page${pageNumber}`);
             
             // 设置当前页的动画
-            current.style.transform = "translateX(100%)";
+            current.style.transform = "translateY(100%)";
             current.style.opacity = 0;
             
             // 设置上一页的动画
-            prev.style.transform = "translateX(0)";
+            prev.style.transform = "translateY(0)";
             prev.style.opacity = 1;
             
             currentPage = pageNumber;
