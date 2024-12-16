@@ -76,6 +76,24 @@
             background-color: #e04a4a;
         }
 
+        .info-card {
+            background-color: rgba(0, 0, 0, 0.6);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .info-card h2 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .info-card p {
+            font-size: 1.1em;
+            color: #fff;
+        }
+
         #page1 {
             left: 0;
             opacity: 1;
@@ -85,34 +103,73 @@
             left: 100%;
         }
 
+        /* 自定义技能动画 */
+        .skills-animation {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .skills-animation img {
+            width: 50px;
+            height: 50px;
+            margin: 0 15px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .skills-animation img:hover {
+            transform: scale(1.1);
+        }
+
     </style>
 </head>
 <body>
     <div class="container">
         <div class="page" id="page1">
             <h1>欢迎来到《瓦罗兰特》！</h1>
-            <p>《瓦罗兰特》是由Riot Games开发的战术射击游戏，在其中玩家可以扮演各种角色，利用不同的技能进行对抗。</p>
+            <p>《瓦罗兰特》是由Riot Games开发的战术射击游戏，玩家们可以选择不同的“特工”进行对战。每个特工都有独特的技能和背景。</p>
             <img src="https://game.gtimg.cn/images/val/hero_img/jett.jpg" alt="Jett - Valorant" />
             <button onclick="nextPage(2)">了解Jett</button>
         </div>
         <div class="page" id="page2">
             <h1>Jett - 快速的风之使者</h1>
-            <p>Jett 是一名机动性极强的角色，能够利用风的力量在战场上快速移动，轻松躲避敌人的攻击。</p>
+            <div class="info-card">
+                <h2>背景故事</h2>
+                <p>Jett是一名机动性极强的角色，她能够利用风的力量在战场上快速移动。她的身手非常敏捷，能够迅速躲避敌人的攻击并快速反击。</p>
+            </div>
             <img src="https://game.gtimg.cn/images/val/hero_img/jett.jpg" alt="Jett - Valorant" />
             <button onclick="nextPage(3)">Jett的技能</button>
         </div>
         <div class="page" id="page3">
             <h1>Jett的技能</h1>
-            <p>Jett的技能包括：空中飘移、风刃投掷、风之加速等，能够快速调整战斗位置和击杀敌人。</p>
-            <img src="https://game.gtimg.cn/images/val/hero_img/jett_skill.jpg" alt="Jett Skills - Valorant" />
+            <div class="info-card">
+                <h2>技能展示</h2>
+                <p>Jett的技能包括快速移动、飘移躲避和投掷风刃。她的机动性使她能够在战斗中瞬间改变位置，让敌人无法预测。</p>
+            </div>
+            <div class="skills-animation">
+                <img src="https://game.gtimg.cn/images/val/hero_img/skill1.png" alt="空中飘移" title="空中飘移" onclick="alert('Jett的空中飘移技能：快速跳跃并改变位置！')" />
+                <img src="https://game.gtimg.cn/images/val/hero_img/skill2.png" alt="风刃" title="风刃" onclick="alert('Jett的风刃技能：投掷风刃对敌人造成伤害！')" />
+                <img src="https://game.gtimg.cn/images/val/hero_img/skill3.png" alt="风之加速" title="风之加速" onclick="alert('Jett的风之加速技能：加速移动并在短时间内增加速度！')" />
+            </div>
             <button onclick="prevPage(2)">上一页</button>
-            <button onclick="nextPage(4)">了解Jett的战斗风格</button>
+            <button onclick="nextPage(4)">Jett的战斗风格</button>
         </div>
         <div class="page" id="page4">
             <h1>Jett的战斗风格</h1>
-            <p>Jett擅长利用其超高的机动性，迅速进入敌人阵地，进行高爆发的攻击，然后迅速撤离。</p>
+            <div class="info-card">
+                <h2>战术分析</h2>
+                <p>Jett善于利用超高的机动性进行快速进攻和撤退。她非常适合进行快速突破，给敌人带来巨大的压力。</p>
+            </div>
             <img src="https://game.gtimg.cn/images/val/hero_img/jett_combat.jpg" alt="Jett Battle Style - Valorant" />
             <button onclick="prevPage(3)">上一页</button>
+            <button onclick="nextPage(5)">观看Jett的精彩战斗</button>
+        </div>
+        <div class="page" id="page5">
+            <h1>观看Jett的精彩战斗</h1>
+            <p>点击下方按钮观看Jett的精彩战斗视频，看看她如何在对战中运用其机动性优势。</p>
+            <button onclick="window.open('https://www.youtube.com/watch?v=dQw4w9WgXcQ')">观看视频</button>
+            <button onclick="prevPage(4)">上一页</button>
         </div>
     </div>
 
@@ -147,3 +204,4 @@
     </script>
 </body>
 </html>
+
