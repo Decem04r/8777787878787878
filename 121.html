@@ -1,164 +1,131 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh">
 <head>
-<meta charset="UTF-8">
-<title>外卖点单系统</title>
-<style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: Arial, sans-serif; background-color: #f4f4f9; color: #333; }
-  .header, .footer { text-align: center; padding: 20px; background-color: #ff6600; color: white; }
-  .menu-section { display: flex; flex-wrap: wrap; justify-content: space-around; padding: 20px; }
-  .menu-item { width: 25%; margin: 10px; background-color: white; box-shadow: 0 4px 8px rgba(0,0,0,.1); transition: transform .2s; border-radius: 8px; overflow: hidden; }
-  .menu-item:hover { transform: scale(1.05); }
-  .item-image { width: 100%; height: auto; }
-  .item-name, .item-price { text-align: center; padding: 10px; background-color: #ffebcc; }
-  .item-description { padding: 10px; font-size: 0.9em; color: #777; }
-  .add-to-cart { display: block; width: 100%; padding: 10px; text-align: center; background-color: #ff6600; color: white; text-decoration: none; border: none; cursor: pointer; }
-  .cart { margin-top: 20px; text-align: center; padding: 20px; background-color: white; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,.1); }
-  .cart-item { display: flex; align-items: center; justify-content: space-between; padding: 10px; border-bottom: 1px solid #ddd; }
-  .cart-item:last-child { border-bottom: none; }
-  .remove-from-cart { background-color: #ff6600; color: white; border: none; cursor: pointer; padding: 5px 10px; }
-  .total-price { font-weight: bold; margin-top: 10px; }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>瓦罗兰特 - Jett</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            height: 100%;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background: linear-gradient(135deg, #2a74f4, #9b56b5);
+        }
+
+        .page {
+            position: absolute;
+            top: 0;
+            left: 100%;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: transform 0.5s ease, opacity 0.5s ease;
+        }
+
+        .page h1 {
+            font-size: 3em;
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .page p {
+            color: #f0f0f0;
+            font-size: 1.2em;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 1.1em;
+            border: none;
+            background-color: #ff5b5b;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #e04a4a;
+        }
+
+        /* 页面样式 */
+        #page1 {
+            left: 0;
+            opacity: 1;
+        }
+
+        .page:not(#page1) {
+            left: 100%;
+        }
+
+    </style>
 </head>
 <body>
+    <div class="container">
+        <div class="page" id="page1">
+            <h1>欢迎来到瓦罗兰特！</h1>
+            <p>这是一款由 Riot Games 开发的竞技射击游戏，Jett 是其中的一个角色。</p>
+            <button onclick="nextPage(2)">下一页</button>
+        </div>
+        <div class="page" id="page2">
+            <h1>Jett介绍</h1>
+            <p>Jett是一个机动性很强的角色，擅长通过风的力量快速移动。</p>
+            <button onclick="nextPage(3)">下一页</button>
+        </div>
+        <div class="page" id="page3">
+            <h1>技能：空中飘移</h1>
+            <p>Jett 的技能让她能够在空中快速调整方向并增加机动性。</p>
+            <button onclick="prevPage(2)">上一页</button>
+        </div>
+    </div>
 
-<header class="header">
-  <h1>欢迎来到美食天堂</h1>
-</header>
+    <script>
+        let currentPage = 1;
 
-<section class="menu-section">
-  
-  <!-- Menu Item -->
-  <div class="menu-item" data-id="1" data-price="25.00">
-    <img src="https://example.com/images/burger.jpg" alt="经典牛肉汉堡" class="item-image">
-    <div class="item-name">经典牛肉汉堡</div>
-    <div class="item-price">￥25.00</div>
-    <div class="item-description">精选新鲜食材制作的美味牛肉汉堡。</div>
-    <button class="add-to-cart">加入购物车</button>
-  </div>
-  
-  <!-- Add more menu items here -->
-  <div class="menu-item" data-id="2" data-price="45.00">
-    <img src="https://example.com/images/pizza.jpg" alt="意式火腿披萨" class="item-image">
-    <div class="item-name">意式火腿披萨</div>
-    <div class="item-price">￥45.00</div>
-    <div class="item-description">传统意大利风味，薄底加上丰富的配料。</div>
-    <button class="add-to-cart">加入购物车</button>
-  </div>
-  
-  <div class="menu-item" data-id="3" data-price="35.00">
-    <img src="https://example.com/images/sushi.jpg" alt="三文鱼寿司" class="item-image">
-    <div class="item-name">三文鱼寿司</div>
-    <div class="item-price">￥35.00</div>
-    <div class="item-description">新鲜三文鱼片搭配香糯米饭。</div>
-    <button class="add-to-cart">加入购物车</button>
-  </div>
-  
-  <div class="menu-item" data-id="4" data-price="20.00">
-    <img src="https://example.com/images/salad.jpg" alt="凯撒沙拉" class="item-image">
-    <div class="item-name">凯撒沙拉</div>
-    <div class="item-price">￥20.00</div>
-    <div class="item-description">经典的凯撒沙拉，配有特制酱汁。</div>
-    <button class="add-to-cart">加入购物车</button>
-  </div>
-  
-  <div class="menu-item" data-id="5" data-price="18.00">
-    <img src="https://example.com/images/soup.jpg" alt="南瓜浓汤" class="item-image">
-    <div class="item-name">南瓜浓汤</div>
-    <div class="item-price">￥18.00</div>
-    <div class="item-description">用新鲜南瓜熬制的健康浓汤。</div>
-    <button class="add-to-cart">加入购物车</button>
-  </div>
-  
-  <div class="menu-item" data-id="6" data-price="28.00">
-    <img src="https://example.com/images/tiramisu.jpg" alt="提拉米苏" class="item-image">
-    <div class="item-name">提拉米苏</div>
-    <div class="item-price">￥28.00</div>
-    <div class="item-description">正宗意大利甜品，咖啡与奶酪的完美结合。</div>
-    <button class="add-to-cart">加入购物车</button>
-  </div>
-  
-  <!-- Additional Menu Items -->
-  <div class="menu-item" data-id="7" data-price="30.00">
-    <img src="https://example.com/images/steak.jpg" alt="黑椒牛排" class="item-image">
-    <div class="item-name">黑椒牛排</div>
-    <div class="item-price">￥30.00</div>
-    <div class="item-description">精选上等牛肉，煎至完美熟度。</div>
-    <button class="add-to-cart">加入购物车</button>
-  </div>
-  
-  <div class="menu-item" data-id="8" data-price="15.00">
-    <img src="https://example.com/images/coke.jpg" alt="可口可乐" class="item-image">
-    <div class="item-name">可口可乐</div>
-    <div class="item-price">￥15.00</div>
-    <div class="item-description">清爽解渴的经典碳酸饮料。</div>
-    <button class="add-to-cart">加入购物车</button>
-  </div>
-  
-</section>
+        function nextPage(pageNumber) {
+            const current = document.getElementById(`page${currentPage}`);
+            const next = document.getElementById(`page${pageNumber}`);
+            
+            current.style.transform = "translateX(-100%)";
+            current.style.opacity = 0;
+            
+            next.style.transform = "translateX(0)";
+            next.style.opacity = 1;
+            
+            currentPage = pageNumber;
+        }
 
-<div class="cart">
-  <h2>购物车</h2>
-  <ul id="cart-items"></ul>
-  <div class="total-price">总价: ￥<span id="total-price">0.00</span></div>
-</div>
-
-<footer class="footer">
-  <p>&copy; 2024 美食天堂. 保留所有权利.</p>
-</footer>
-
-<script>
-  let cartItems = [];
-  const cartList = document.getElementById('cart-items');
-  const totalPriceElement = document.getElementById('total-price');
-
-  function updateCart() {
-    cartList.innerHTML = '';
-    let total = 0;
-    cartItems.forEach(item => {
-      const li = document.createElement('li');
-      li.className = 'cart-item';
-      li.innerHTML = `
-        ${item.name} - ￥${item.price} 
-        <button class="remove-from-cart" data-id="${item.id}">移除</button>
-      `;
-      cartList.appendChild(li);
-      total += parseFloat(item.price);
-    });
-    totalPriceElement.textContent = total.toFixed(2);
-
-    // Add event listeners to remove buttons after updating the cart
-    document.querySelectorAll('.remove-from-cart').forEach(button => {
-      button.addEventListener('click', function(event) {
-        const itemId = this.dataset.id;
-        cartItems = cartItems.filter(item => item.id !== itemId);
-        updateCart();
-      });
-    });
-  }
-
-  document.querySelectorAll('.add-to-cart').forEach(button => {
-    button.addEventListener('click', function(event) {
-      const item = {
-        id: this.closest('.menu-item').dataset.id,
-        name: this.closest('.menu-item').querySelector('.item-name').textContent,
-        price: this.closest('.menu-item').dataset.price
-      };
-      const existingItemIndex = cartItems.findIndex(cartItem => cartItem.id === item.id);
-      if (existingItemIndex >= 0) {
-        // If the item is already in the cart, do not add it again.
-        alert('该商品已经在购物车中了！');
-      } else {
-        cartItems.push(item);
-        updateCart();
-      }
-    });
-  });
-
-  // Initialize the cart with a zero total.
-  updateCart();
-</script>
-
+        function prevPage(pageNumber) {
+            const current = document.getElementById(`page${currentPage}`);
+            const prev = document.getElementById(`page${pageNumber}`);
+            
+            current.style.transform = "translateX(100%)";
+            current.style.opacity = 0;
+            
+            prev.style.transform = "translateX(0)";
+            prev.style.opacity = 1;
+            
+            currentPage = pageNumber;
+        }
+    </script>
 </body>
 </html>
+
